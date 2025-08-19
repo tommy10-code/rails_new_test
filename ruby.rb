@@ -1,5 +1,15 @@
-def chapter06_04(runtekun_profile)
+require 'net/http'
+require 'uri'
+require 'json'
+
+def chapter10_02
   # コードを記述
-  runtekun_profile.each { |key, value| "#{key}は、#{value}です。" }
+  uri = URI.parse("https://zipcloud.ibsnet.co.jp/api/search?zipcode=1500042")
+  response = Net::HTTP.get(uri)
+  data = JSON.parse(response)
 end
-puts chapter06_04({ name: 'らんてくん', birthday: '7月8日', tall: 80, weight: 25.6 })
+
+data = chapter10_02
+result = data["results"]
+puts "#{result["address1"]}#{result["address2"]}"
+
